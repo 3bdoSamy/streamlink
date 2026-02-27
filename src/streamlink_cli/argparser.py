@@ -80,7 +80,7 @@ class ArgumentParser(argparse.ArgumentParser):
             return [f"{prefix}{name}"]
 
     def _match_argument(self, action: argparse.Action, arg_strings_pattern: str) -> int:
-        # - https://github.com/streamlink/streamlink/issues/971
+        # - https://github.com/3bdoSamy/streamlink-ar/issues/971
         # - https://bugs.python.org/issue9334
         # - https://github.com/python/cpython/blame/v3.13.0rc2/Lib/argparse.py#L2227-L2247
 
@@ -184,7 +184,7 @@ def build_parser():
               https://streamlink.github.io/
 
             Please report broken plugins or bugs to the issue tracker on GitHub:
-              https://github.com/streamlink/streamlink/issues
+              https://github.com/3bdoSamy/streamlink-ar/issues
         """),
     )
 

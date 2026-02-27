@@ -1,12 +1,12 @@
-<h1 align="center"><a href="https://streamlink.github.io/">Streamlink<br><img height="150" alt="Streamlink" src="https://raw.githubusercontent.com/streamlink/streamlink/master/icon.svg"></a></h1>
+<h1 align="center"><a href="https://streamlink.github.io/">Streamlink<br><img height="150" alt="Streamlink" src="https://raw.githubusercontent.com/3bdoSamy/streamlink-ar/main/icon.svg"></a></h1>
 
 <p align="center">
   <a href="https://streamlink.github.io/install.html"><img alt="Supported Python versions" src="https://img.shields.io/pypi/pyversions/streamlink.svg?style=flat-square&maxAge=86400"></a>
-  <a href="https://streamlink.github.io/changelog.html"><img alt="Latest release" src="https://img.shields.io/github/release/streamlink/streamlink.svg?style=flat-square&maxAge=86400"></a>
-  <a href="https://github.com/streamlink/streamlink"><img alt="License" src="https://img.shields.io/github/license/streamlink/streamlink.svg?style=flat-square&maxAge=86400"></a>
-  <a href="https://github.com/streamlink/streamlink/issues"><img alt="Open issues" src="https://img.shields.io/github/issues/streamlink/streamlink.svg?style=flat-square&maxAge=86400"></a>
-  <a href="https://github.com/streamlink/streamlink/actions?query=event%3Apush"><img alt="Build status" src="https://img.shields.io/github/actions/workflow/status/streamlink/streamlink/test.yml?branch=master&event=push&style=flat-square&maxAge=86400"></a>
-  <a href="https://codecov.io/github/streamlink/streamlink?branch=master"><img alt="Overall code coverage" src="https://img.shields.io/codecov/c/github/streamlink/streamlink.svg?branch=master&style=flat-square&maxAge=86400"></a>
+  <a href="https://streamlink.github.io/changelog.html"><img alt="Latest release" src="https://img.shields.io/github/release/3bdoSamy/streamlink-ar.svg?style=flat-square&maxAge=86400"></a>
+  <a href="https://github.com/3bdoSamy/streamlink-ar"><img alt="License" src="https://img.shields.io/github/license/3bdoSamy/streamlink-ar.svg?style=flat-square&maxAge=86400"></a>
+  <a href="https://github.com/3bdoSamy/streamlink-ar/issues"><img alt="Open issues" src="https://img.shields.io/github/issues/3bdoSamy/streamlink-ar.svg?style=flat-square&maxAge=86400"></a>
+  <a href="https://github.com/3bdoSamy/streamlink-ar/actions?query=event%3Apush"><img alt="Build status" src="https://img.shields.io/github/actions/workflow/status/3bdoSamy/streamlink-ar/test.yml?branch=main&event=push&style=flat-square&maxAge=86400"></a>
+  <a href="https://codecov.io/github/3bdoSamy/streamlink-ar?branch=main"><img alt="Overall code coverage" src="https://img.shields.io/codecov/c/github/3bdoSamy/streamlink-ar.svg?branch=main&style=flat-square&maxAge=86400"></a>
 </p>
 
 <p align="center">
@@ -74,5 +74,5 @@ Your support is very much appreciated, thank you!
   [streamlink-documentation-apiref]: https://streamlink.github.io/api.html
   [streamlink-plugins]: https://streamlink.github.io/plugins.html
   [player-vlc]: https://www.videolan.org/vlc/
-  [contributing]: https://github.com/streamlink/streamlink/blob/master/CONTRIBUTING.md
+  [contributing]: https://github.com/3bdoSamy/streamlink-ar/blob/main/CONTRIBUTING.md
   [support]: https://streamlink.github.io/latest/support.html
