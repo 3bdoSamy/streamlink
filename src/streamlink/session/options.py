@@ -62,7 +62,7 @@ class StreamlinkOptions(Options):
           - Disable the plugin key-value store
         * - locale
           - ``str``
-          - *system locale*
+          - ``"ar_SA"``
           - Locale setting, in the RFC 1766 format,
             e.g. ``en_US`` or ``es_ES``
         * - interface
@@ -238,6 +238,10 @@ class StreamlinkOptions(Options):
           - ``str | None``
           - ``None``
           - Set FFmpeg's ``-loglevel`` value
+        * - ffmpeg-dkey
+          - ``str | None``
+          - ``None``
+          - Set FFmpeg's ``-decryption_key`` value for encrypted inputs
         * - ffmpeg-fout
           - ``str | None``
           - ``None``
@@ -292,7 +296,7 @@ class StreamlinkOptions(Options):
         super().__init__({
             "user-input-requester": None,
             "no-plugin-cache": False,
-            "locale": None,
+            "locale": "ar_SA",
             "interface": None,
             "ipv4": False,
             "ipv6": False,
@@ -320,6 +324,7 @@ class StreamlinkOptions(Options):
             "ffmpeg-verbose": False,
             "ffmpeg-verbose-path": None,
             "ffmpeg-loglevel": None,
+            "ffmpeg-dkey": None,
             "ffmpeg-fout": None,
             "ffmpeg-video-transcode": None,
             "ffmpeg-audio-transcode": None,
