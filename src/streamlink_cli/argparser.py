@@ -1278,13 +1278,11 @@ def build_parser():
     transport_ffmpeg.add_argument(
         "--ffmpeg-dkey",
         type=str,
-        action="append",
         metavar="DKEY",
         help="""
             Set FFmpeg's `-decryption_key` value for encrypted stream inputs.
-            Can be repeated to provide multiple keys.
 
-            Example: --ffmpeg-dkey "key1" --ffmpeg-dkey "key2"
+            Example: --ffmpeg-dkey "00112233445566778899aabbccddeeff"
         """,
     )
     transport_ffmpeg.add_argument(

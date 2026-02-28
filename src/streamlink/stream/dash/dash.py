@@ -341,19 +341,25 @@ class DASHStream(Stream):
 
         # Search for suitable video and audio representations
         allow_encrypted = bool(session.options.get("ffmpeg-dkey"))
+        has_content_protection = False
 
         for aset in period_selection.adaptationSets:
             if aset.contentProtections:
+                has_content_protection = True
                 if not allow_encrypted:
                     raise PluginError(f"{source} is protected by DRM")
             for rep in aset.representations:
                 if rep.contentProtections:
+                    has_content_protection = True
                     if not allow_encrypted:
                         raise PluginError(f"{source} is protected by DRM")
                 if rep.mimeType.startswith("video"):
                     video.append(rep)
                 elif rep.mimeType.startswith("audio"):  # pragma: no branch
                     audio.append(rep)
+
+        if allow_encrypted and has_content_protection:
+            log.warning("DASH manifest has ContentProtection, attempting decryption via --ffmpeg-dkey")
 
         if not video:
             video.append(None)

@@ -243,9 +243,9 @@ class StreamlinkOptions(Options):
           - ``None``
           - Set FFmpeg's ``-loglevel`` value
         * - ffmpeg-dkey
-          - ``list[str]``
-          - ``[]``
-          - Set one or more FFmpeg ``-decryption_key`` values for encrypted inputs
+          - ``str | None``
+          - ``None``
+          - Set FFmpeg's ``-decryption_key`` value for encrypted inputs
         * - ffmpeg-fout
           - ``str | None``
           - ``None``
@@ -329,7 +329,7 @@ class StreamlinkOptions(Options):
             "ffmpeg-verbose": False,
             "ffmpeg-verbose-path": None,
             "ffmpeg-loglevel": None,
-            "ffmpeg-dkey": [],
+            "ffmpeg-dkey": None,
             "ffmpeg-fout": None,
             "ffmpeg-video-transcode": None,
             "ffmpeg-audio-transcode": None,
