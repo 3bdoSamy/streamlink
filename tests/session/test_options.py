@@ -74,7 +74,7 @@ def test_session_option_set_deprecated(recwarn: pytest.WarningsRecorder, session
 
 def test_options_locale(monkeypatch: pytest.MonkeyPatch, session: Streamlink):
     monkeypatch.setattr("locale.getlocale", lambda: ("C", None))
-    assert session.get_option("locale") is None
+    assert session.get_option("locale") == "ar_SA"
 
     localization = session.localization
     assert localization.explicit is False

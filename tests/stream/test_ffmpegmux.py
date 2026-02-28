@@ -604,6 +604,20 @@ class TestOpen:
 
         streamio.close()
 
+    def test_dkey(self, session: Streamlink):
+        stream = Mock()
+        session.options.update({"ffmpeg-dkey": ["00112233445566778899aabbccddeeff"]})
+
+        streamio = FFMPEGMuxer(session, stream)
+        assert "-decryption_key" in streamio._cmd
+        assert "00112233445566778899aabbccddeeff" in streamio._cmd
+
+    def test_dkey_multiple(self, session: Streamlink):
+        streamio = FFMPEGMuxer(session, Mock(), Mock(), dkey=["key1", "key2"])
+        assert streamio._cmd.count("-decryption_key") == 2
+        assert "key1" in streamio._cmd
+        assert "key2" in streamio._cmd
+
     def test_stderr(self, monkeypatch: pytest.MonkeyPatch, session: Streamlink, popen: Mock):
         mock_stderr = Mock()
         session.options.update({"ffmpeg-verbose": True})

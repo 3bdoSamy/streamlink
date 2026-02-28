@@ -32,6 +32,14 @@ if TYPE_CHECKING:
 log = getLogger(".".join(__name__.split(".")[:-1]))
 
 
+def _language_matches(lang_code: str, preferred: str) -> bool:
+    if lang_code.lower() == preferred.lower():
+        return True
+    with suppress(LookupError):
+        return Language.get(lang_code) == Language.get(preferred)
+    return False
+
+
 class DASHStreamWriter(SegmentedStreamWriter[DASHSegment, Response]):
     WRITE_CHUNK_SIZE: int = 8192
 
@@ -332,22 +340,33 @@ class DASHStream(Stream):
             ) from None
 
         # Search for suitable video and audio representations
+        allow_encrypted = bool(session.options.get("ffmpeg-dkey"))
+        has_content_protection = False
+
         for aset in period_selection.adaptationSets:
             if aset.contentProtections:
-                raise PluginError(f"{source} is protected by DRM")
+                has_content_protection = True
+                if not allow_encrypted:
+                    raise PluginError(f"{source} is protected by DRM")
             for rep in aset.representations:
                 if rep.contentProtections:
-                    raise PluginError(f"{source} is protected by DRM")
+                    has_content_protection = True
+                    if not allow_encrypted:
+                        raise PluginError(f"{source} is protected by DRM")
                 if rep.mimeType.startswith("video"):
                     video.append(rep)
                 elif rep.mimeType.startswith("audio"):  # pragma: no branch
                     audio.append(rep)
+
+        if allow_encrypted and has_content_protection:
+            log.warning("DASH manifest has ContentProtection, attempting decryption via --ffmpeg-dkey")
 
         if not video:
             video.append(None)
         if not audio:
             audio.append(None)
 
+        preferred_audio_langs = session.options.get("dash-audio-lang") or []
         locale = session.localization
         locale_lang = locale.language
         lang = None
@@ -357,9 +376,17 @@ class DASHStream(Stream):
         for aud in audio:
             if aud and aud.lang:
                 available_languages.add(aud.lang)
-                with suppress(LookupError):
-                    if locale.explicit and aud.lang and Language.get(aud.lang) == locale_lang:
-                        lang = aud.lang
+                if not lang:
+                    with suppress(LookupError):
+                        if locale.explicit and aud.lang and Language.get(aud.lang) == locale_lang:
+                            lang = aud.lang
+
+        if preferred_audio_langs and available_languages:
+            for preferred in preferred_audio_langs:
+                match = next((available for available in available_languages if _language_matches(available, preferred)), None)
+                if match:
+                    lang = match
+                    break
 
         if not lang:
             # filter by the first language that appears

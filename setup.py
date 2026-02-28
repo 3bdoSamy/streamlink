@@ -47,11 +47,17 @@ def is_wheel_for_windows(argv):
 
 
 entry_points = {
-    "console_scripts": ["streamlink=streamlink_cli.main:main"],
+    "console_scripts": [
+        "streamlink=streamlink_cli.main:main",
+        "streamlink-ar=streamlink_cli.main:main",
+    ],
 }
 
 if is_wheel_for_windows(sys.argv):
-    entry_points["gui_scripts"] = ["streamlinkw=streamlink_cli.main:main"]
+    entry_points["gui_scripts"] = [
+        "streamlinkw=streamlink_cli.main:main",
+        "streamlink-arw=streamlink_cli.main:main",
+    ]
 
 
 # optional data files

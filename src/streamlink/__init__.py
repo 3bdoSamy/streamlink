@@ -15,8 +15,8 @@ from streamlink.exceptions import StreamlinkError, PluginError, NoStreamsError, 
 from streamlink.session import Streamlink
 
 
-__title__ = "streamlink"
+__title__ = "streamlink-ar"
 __license__ = "Simplified BSD"
 __author__ = "Streamlink"
 __copyright__ = "Copyright 2026 Streamlink"
-__credits__ = ["https://github.com/streamlink/streamlink/blob/master/AUTHORS"]
+__credits__ = ["https://github.com/3bdoSamy/streamlink-ar/blob/main/AUTHORS"]

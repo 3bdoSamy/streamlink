@@ -299,11 +299,11 @@ then Streamlink can be installed via `pip`_, the Python package manager.
     * - :octicon:`verified` `Master branch`_
       - .. code-block:: bash
 
-            pip install -U git+https://github.com/streamlink/streamlink.git
+            pip install -U git+https://github.com/3bdoSamy/streamlink-ar.git
     * - :octicon:`unverified` `From a pull request <pip-install-vcs_>`_
       - .. code-block:: bash
 
-            pip install -U git+https://github.com/streamlink/streamlink.git@refs/pull/PULL-REQUEST-ID/head
+            pip install -U git+https://github.com/3bdoSamy/streamlink-ar.git@refs/pull/PULL-REQUEST-ID/head
     * - :octicon:`unverified` `Specific tag/branch/commit <pip-install-vcs_>`_
       - .. code-block:: bash
 
@@ -311,7 +311,7 @@ then Streamlink can be installed via `pip`_, the Python package manager.
 
 .. _pip: https://pip.pypa.io/en/stable/
 .. _Latest release: https://pypi.python.org/pypi/streamlink
-.. _Master branch: https://github.com/streamlink/streamlink/commits/master
+.. _Master branch: https://github.com/3bdoSamy/streamlink-ar/commits/main
 .. _pip-install-vcs: https://pip.pypa.io/en/stable/topics/vcs-support/#git
 
 
@@ -342,7 +342,7 @@ Install using ``venv`` and ``pip``
     pip install --upgrade streamlink
 
     # *Or*, install the most up-to-date development version from master on GitHub
-    pip install --upgrade git+https://github.com/streamlink/streamlink.git
+    pip install --upgrade git+https://github.com/3bdoSamy/streamlink-ar.git
 
     # Use Streamlink in the environment
     streamlink ...
@@ -365,7 +365,7 @@ install it first, either with a system package manager, or using ``pip``, as det
     pipx install streamlink
 
     # *Or*, install the most up-to-date development version from master on GitHub
-    pipx install git+https://github.com/streamlink/streamlink.git
+    pipx install git+https://github.com/3bdoSamy/streamlink-ar.git
 
     # Use Streamlink
     streamlink ...
@@ -397,7 +397,7 @@ See the `Dependencies`_ section down below for the required build- and runtime-r
     Instead, build from Streamlink's signed source-distribution tarballs which are uploaded to PyPI and GitHub releases,
     or from the cloned git repository.
 
-.. _GitHub Releases: https://github.com/streamlink/streamlink/releases
+.. _GitHub Releases: https://github.com/3bdoSamy/streamlink-ar/releases
 
 Dependencies
 ^^^^^^^^^^^^
@@ -485,7 +485,7 @@ Streamlink defines a `build system <pyproject.toml_>`__ according to `PEP-517`_ 
         | ``decompress`` extras marker
       - Used for decompressing HTTP responses
 
-.. _pyproject.toml: https://github.com/streamlink/streamlink/blob/master/pyproject.toml
+.. _pyproject.toml: https://github.com/3bdoSamy/streamlink-ar/blob/main/pyproject.toml
 .. _PEP-517: https://peps.python.org/pep-0517/
 .. _PEP-518: https://peps.python.org/pep-0518/
 
@@ -605,7 +605,7 @@ Windows binaries
 
     .. grid-item-card::
         :padding: 3
-        :link: https://github.com/streamlink/streamlink
+        :link: https://github.com/3bdoSamy/streamlink-ar
         :link-alt: Streamlink and its runtime dependencies
         :text-align: center
 
@@ -693,7 +693,7 @@ Linux AppImages
 
     .. grid-item-card::
         :padding: 3
-        :link: https://github.com/streamlink/streamlink
+        :link: https://github.com/3bdoSamy/streamlink-ar
         :link-alt: Streamlink and its runtime dependencies
         :text-align: center
 
@@ -759,4 +759,4 @@ found in the `AppImage documentation`_.
 .. _FUSE: https://docs.appimage.org/user-guide/troubleshooting/fuse.html
 .. _AppImage documentation: https://docs.appimage.org/user-guide/run-appimages.html
 
-.. _streamlink-master: https://github.com/streamlink/streamlink/commits/master
+.. _streamlink-master: https://github.com/3bdoSamy/streamlink-ar/commits/main
