@@ -68,11 +68,10 @@ streamlink-ar --ffmpeg-dkey "03de....." \
 
 ---
 
-## 🎧 Multiple Audio Languages Example
+## 🎧 Audio Languages selection Example 
 
 ```bash
 streamlink-ar --audio-lang Ara \
-              --audio-lang En \
               "URL of mpd" best \
               -o "/home/user/Downloads/test.mkv"
 ```
