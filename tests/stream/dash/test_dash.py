@@ -314,6 +314,26 @@ class TestDASHStreamParseManifest:
         with pytest.raises(PluginError):
             DASHStream.parse_manifest(session, "http://test/manifest.mpd")
 
+    @pytest.mark.parametrize(
+        "adaptationset",
+        [
+            pytest.param(
+                Mock(contentProtections="DRM", representations=[]),
+                id="ContentProtection on AdaptationSet",
+            ),
+            pytest.param(
+                Mock(contentProtections=None, representations=[Mock(id="1", contentProtections="DRM", mimeType="video/mp4", height=720)]),
+                id="ContentProtection on Representation",
+            ),
+        ],
+    )
+    def test_contentprotection_with_dkey(self, session: Streamlink, mpd: Mock, adaptationset: Mock):
+        session.set_option("ffmpeg-dkey", "00112233445566778899aabbccddeeff")
+        mpd.return_value = Mock(periods=[Mock(adaptationSets=[adaptationset])])
+
+        streams = DASHStream.parse_manifest(session, "http://test/manifest.mpd")
+        assert isinstance(streams, dict)
+
     @pytest.mark.nomockedhttprequest()
     def test_string(self, session: Streamlink, mpd: Mock, parse_xml: Mock):
         with text("dash/test_9.mpd") as mpd_txt:
