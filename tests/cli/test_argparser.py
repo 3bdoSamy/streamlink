@@ -223,6 +223,18 @@ class TestMatchArgumentOverride:
             id="Arg with action=store_true",
         ),
         pytest.param(
+            ["--ffmpeg-dkey", "00112233445566778899aabbccddeeff"],
+            "ffmpeg-dkey",
+            ["00112233445566778899aabbccddeeff"],
+            id="Arg+value ffmpeg dkey",
+        ),
+        pytest.param(
+            ["--audio-lang", "ara", "--audio-lang", "eng"],
+            "dash-audio-lang",
+            ["ara", "eng"],
+            id="Arg+value dash audio lang",
+        ),
+        pytest.param(
             ["--http-no-ssl-verify"],
             "http-ssl-verify",
             False,

@@ -200,6 +200,11 @@ class FFMPEGMuxer(StreamIO):
         ]
 
         loglevel = session.options.get("ffmpeg-loglevel") or options.pop("loglevel", self.DEFAULT_LOGLEVEL)
+        dkeys = session.options.get("ffmpeg-dkey") or options.pop("dkey", None)
+        if isinstance(dkeys, str):
+            dkeys = [dkeys]
+        elif not dkeys:
+            dkeys = []
         ofmt = session.options.get("ffmpeg-fout") or options.pop("format", self.DEFAULT_OUTPUT_FORMAT)
         outpath = options.pop("outpath", "pipe:1")
         videocodec = session.options.get("ffmpeg-video-transcode") or options.pop("vcodec", self.DEFAULT_VIDEO_CODEC)
@@ -217,7 +222,10 @@ class FFMPEGMuxer(StreamIO):
             loglevel,
         ]
 
-        for np in self.pipes:
+        for idx, np in enumerate(self.pipes):
+            if dkeys:
+                dkey = dkeys[idx] if idx < len(dkeys) else dkeys[-1]
+                self._cmd.extend(["-decryption_key", dkey])
             self._cmd.extend(["-i", str(np.path)])
 
         self._cmd.extend(["-c:v", videocodec])

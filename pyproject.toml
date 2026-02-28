@@ -14,7 +14,7 @@ build-backend = "__init__"
 # https://peps.python.org/pep-0621/
 # https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
 [project]
-name = "streamlink"
+name = "streamlink-ar"
 description = """\
 Streamlink is a command-line utility that extracts streams from various services and pipes them into a video player of choice.\
 """
@@ -80,10 +80,10 @@ decompress = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/streamlink/streamlink"
+Homepage = "https://github.com/3bdoSamy/streamlink-ar"
 Documentation = "https://streamlink.github.io/"
-Tracker = "https://github.com/streamlink/streamlink/issues"
-Source = "https://github.com/streamlink/streamlink"
+Tracker = "https://github.com/3bdoSamy/streamlink-ar/issues"
+Source = "https://github.com/3bdoSamy/streamlink-ar"
 Funding = "https://streamlink.github.io/latest/support.html"
 
 
