@@ -240,6 +240,22 @@ class TestDASHStreamParseManifest:
         assert getattr(streams["720p"].audio_representation, "lang", None) == "en_no_voice"
         assert getattr(streams["1080p"].audio_representation, "lang", None) == "en_no_voice"
 
+    def test_audio_multi_lang_preferred(self, session: Streamlink, mpd: Mock):
+        session.set_option("dash-audio-lang", ["ara", "eng"])
+
+        adaptationset = Mock(
+            contentProtections=None,
+            representations=[
+                Mock(id="1", contentProtections=None, mimeType="video/mp4", height=720),
+                Mock(id="2", contentProtections=None, mimeType="audio/aac", bandwidth=128.0, lang="eng"),
+                Mock(id="3", contentProtections=None, mimeType="audio/aac", bandwidth=128.0, lang="ara"),
+            ],
+        )
+        mpd.return_value = Mock(periods=[Mock(adaptationSets=[adaptationset])])
+
+        streams = DASHStream.parse_manifest(session, "http://test/manifest.mpd")
+        assert streams["720p"].audio_representation.lang == "ara"
+
     def test_audio_multi_lang_locale(self, monkeypatch: pytest.MonkeyPatch, session: Streamlink, mpd: Mock):
         session.set_option("locale", "es_ES")
 

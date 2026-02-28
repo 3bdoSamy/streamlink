@@ -32,6 +32,14 @@ if TYPE_CHECKING:
 log = getLogger(".".join(__name__.split(".")[:-1]))
 
 
+def _language_matches(lang_code: str, preferred: str) -> bool:
+    if lang_code.lower() == preferred.lower():
+        return True
+    with suppress(LookupError):
+        return Language.get(lang_code) == Language.get(preferred)
+    return False
+
+
 class DASHStreamWriter(SegmentedStreamWriter[DASHSegment, Response]):
     WRITE_CHUNK_SIZE: int = 8192
 
@@ -358,6 +366,7 @@ class DASHStream(Stream):
         if not audio:
             audio.append(None)
 
+        preferred_audio_langs = session.options.get("dash-audio-lang") or []
         locale = session.localization
         locale_lang = locale.language
         lang = None
@@ -367,9 +376,17 @@ class DASHStream(Stream):
         for aud in audio:
             if aud and aud.lang:
                 available_languages.add(aud.lang)
-                with suppress(LookupError):
-                    if locale.explicit and aud.lang and Language.get(aud.lang) == locale_lang:
-                        lang = aud.lang
+                if not lang:
+                    with suppress(LookupError):
+                        if locale.explicit and aud.lang and Language.get(aud.lang) == locale_lang:
+                            lang = aud.lang
+
+        if preferred_audio_langs and available_languages:
+            for preferred in preferred_audio_langs:
+                match = next((available for available in available_languages if _language_matches(available, preferred)), None)
+                if match:
+                    lang = match
+                    break
 
         if not lang:
             # filter by the first language that appears

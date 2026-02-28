@@ -944,6 +944,19 @@ def build_parser():
     transport = parser.add_argument_group("Stream transport options")
     transport_hls = parser.add_argument_group("HLS options", parent=transport)
     transport_dash = parser.add_argument_group("DASH options", parent=transport)
+    transport_dash.add_argument(
+        "--audio-lang",
+        type=str,
+        action="append",
+        metavar="LANG",
+        help="""
+            Preferred DASH audio language code.
+            Can be repeated to provide fallback languages.
+
+            Examples: --audio-lang ara --audio-lang eng
+        """,
+    )
+
     transport_ffmpeg = parser.add_argument_group("FFmpeg options", parent=transport)
 
     transport.add_argument(
@@ -1580,6 +1593,7 @@ _ARGUMENT_TO_SESSIONOPTION: list[tuple[str, str, Callable[[Any], Any] | None]] =
     ("hls_segment_key_uri", "hls-segment-key-uri", None),
     ("hls_audio_select", "hls-audio-select", None),
     ("dash_manifest_reload_attempts", "dash-manifest-reload-attempts", None),
+    ("audio_lang", "dash-audio-lang", None),
     ("ffmpeg_ffmpeg", "ffmpeg-ffmpeg", None),
     ("ffmpeg_no_validation", "ffmpeg-no-validation", None),
     ("ffmpeg_verbose", "ffmpeg-verbose", None),

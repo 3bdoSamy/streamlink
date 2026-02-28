@@ -213,6 +213,10 @@ class StreamlinkOptions(Options):
           - ``int``
           - ``3``
           - Max number of DASH manifest reload attempts before giving up
+        * - dash-audio-lang
+          - ``list[str]``
+          - ``[]``
+          - Preferred DASH audio language codes
         * - ffmpeg-ffmpeg
           - ``str | None``
           - ``None``
@@ -318,6 +322,7 @@ class StreamlinkOptions(Options):
             "hls-segment-key-uri": None,
             "hls-audio-select": [],
             "dash-manifest-reload-attempts": 3,
+            "dash-audio-lang": [],
             "ffmpeg-ffmpeg": None,
             "ffmpeg-no-validation": False,
             "ffmpeg-validation-timeout": 4.0,
