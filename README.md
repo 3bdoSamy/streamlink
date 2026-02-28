@@ -9,25 +9,19 @@
   <a href="https://codecov.io/github/3bdoSamy/streamlink-ar?branch=main"><img alt="Overall code coverage" src="https://img.shields.io/codecov/c/github/3bdoSamy/streamlink-ar.svg?branch=main&style=flat-square&maxAge=86400"></a>
 </p>
 
-<p align="center">
-  A Python library and command-line interface which pipes streams from various services into a video player.<br>
-  Avoid resource-heavy and unoptimized websites, and still enjoy streamed content.
-</p>
+---
 
-<p align="center">
-  Streamlink was forked in 2016 from the abandoned <em>Livestreamer</em> project.
-</p>
+## 🧩 Fork notice
 
+This repository is a **fork** of the original Streamlink project:
 
-# 📦 Installation
+- 🔗 Original repo: https://github.com/streamlink/streamlink
 
-Please take a look at the documentation for different ways of installing Streamlink:
+If you need full features, advanced docs, or upstream support, please use/check the original repository.
 
-- [Windows][streamlink-installation-windows]
-- [macOS][streamlink-installation-macos]
-- [Linux and BSD][streamlink-installation-linux-and-bsd]
-- [PyPI package and source code][streamlink-installation-pypi-source]
+---
 
+## 📦 Fork install quickstart (streamlink-ar)
 
 
 ## Fork install quickstart (streamlink-ar)
@@ -60,39 +54,41 @@ streamlink-ar --help | Select-String ffmpeg-dkey
 
 # 👍 Features
 
-Streamlink is built on top of a plugin system which allows support for new services to be added easily.  
-Most of the popular streaming services are supported, such as [Twitch](https://www.twitch.tv), [YouTube](https://www.youtube.com), and many more.
-
-A list of all plugins currently included can be found on the [plugins page][streamlink-plugins].
-
-
-# 💡 Quickstart
-
-After installing, simply run:
-
-```sh
-streamlink "STREAMURL" best
+```bash
+git clone https://github.com/3bdoSamy/streamlink-ar.git
+cd streamlink-ar
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip setuptools wheel
+pip install -e .
+streamlink-ar --version
 ```
 
-The default behavior of Streamlink is to play back streams in the [VLC player][player-vlc], but a lot of other options and output methods are available, such as writing the stream to the filesystem, reading stream metadata, etc.
+### 🪟 Windows (PowerShell)
 
-For more in-depth usage, please refer to the [CLI documentation][streamlink-documentation-cli].
+```powershell
+git clone https://github.com/3bdoSamy/streamlink-ar.git
+cd streamlink-ar
+py -3.10 -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -U pip setuptools wheel
+pip install -e .
+streamlink-ar --version
+```
 
-An [API guide][streamlink-documentation-apiguide] and [API reference][streamlink-documentation-apiref] is available for Python implementors of Streamlink.
+---
 
+## ⚡ Quick start
 
-# 🙏 Contributing
+```bash
+streamlink-ar --ffmpeg-dkey key "streamurl" best
+```
 
-All contributions are welcome.
-Feel free to open a new thread on the issue tracker or submit a new pull request.
-Please read [CONTRIBUTING.md][contributing] first. Thanks!
+---
 
+## 🙌 Need anything else?
 
-# ❤️ Support
-
-If you think that Streamlink is useful and if you want to keep the project alive, then please consider supporting its maintainers by sending a small and optionally recurring tip via the [available options][support].  
-Your support is very much appreciated, thank you!
-
+For everything beyond this fork's small changes, please refer to the original Streamlink repo:
 
   [streamlink-installation-windows]: https://streamlink.github.io/install.html#windows
   [streamlink-installation-macos]: https://streamlink.github.io/install.html#macos
