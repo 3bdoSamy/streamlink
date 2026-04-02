@@ -123,9 +123,9 @@ Adhering to the following process is the best way to get your work included in t
 
 1. [Fork][howto-fork] the project, clone your fork, and configure the remotes:
    ```bash
-   git clone git@github.com:YOUR-USERNAME/streamlink.git
-   cd streamlink
-   git remote add upstream https://github.com/streamlink/streamlink.git
+   git clone git@github.com:YOUR-USERNAME/streamlink-ar.git
+   cd streamlink-ar
+   git remote add upstream https://github.com/3bdoSamy/streamlink-ar.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
@@ -232,8 +232,8 @@ After that's done, either install Streamlink by cloning its git repository and f
 
 ```bash
 # via git (further code modifications are simple)
-git clone https://github.com/streamlink/streamlink
-cd streamlink
+git clone https://github.com/3bdoSamy/streamlink-ar
+cd streamlink-ar
 # upgrade to the latest version of pip
 python -m pip install -U pip
 # install in "editable mode", including required development dependencies
@@ -246,7 +246,7 @@ git checkout "LOCAL-BRANCH-NAME"
 
 ```bash
 # via pip (whole install needs to be done on each follow-up code change)
-python -m pip install "git+https://github.com/streamlink/streamlink@refs/pull/PULL-REQUEST-ID/head"
+python -m pip install "git+https://github.com/3bdoSamy/streamlink-ar@refs/pull/PULL-REQUEST-ID/head"
 ```
 
 ```bash
@@ -260,14 +260,14 @@ streamlink --loglevel=debug
 This contributing guide has been adapted from [HTML5 boilerplate's guide][ref-h5bp].
 
 
-  [issues]: https://github.com/streamlink/streamlink/issues
+  [issues]: https://github.com/3bdoSamy/streamlink-ar/issues
   [mastering-markdown]: https://guides.github.com/features/mastering-markdown
   [howto-fork]: https://help.github.com/articles/fork-a-repo
   [howto-rebase]: https://help.github.com/articles/interactive-rebase
   [howto-format-commits]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
   [howto-open-pull-requests]: https://help.github.com/articles/using-pull-requests
   [Git]: https://git-scm.com
-  [license]: https://github.com/streamlink/streamlink/blob/master/LICENSE
+  [license]: https://github.com/3bdoSamy/streamlink-ar/blob/main/LICENSE
   [debug-log]: https://streamlink.github.io/latest/cli.html#cmdoption-loglevel
   [plugin-sideloading]: https://streamlink.github.io/latest/cli/plugin-sideloading.html
   [preview-builds-windows]: https://streamlink.github.io/latest/install.html#windows-binaries

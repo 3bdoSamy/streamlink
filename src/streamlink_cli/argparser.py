@@ -80,7 +80,7 @@ class ArgumentParser(argparse.ArgumentParser):
             return [f"{prefix}{name}"]
 
     def _match_argument(self, action: argparse.Action, arg_strings_pattern: str) -> int:
-        # - https://github.com/streamlink/streamlink/issues/971
+        # - https://github.com/3bdoSamy/streamlink-ar/issues/971
         # - https://bugs.python.org/issue9334
         # - https://github.com/python/cpython/blame/v3.13.0rc2/Lib/argparse.py#L2227-L2247
 
@@ -184,7 +184,7 @@ def build_parser():
               https://streamlink.github.io/
 
             Please report broken plugins or bugs to the issue tracker on GitHub:
-              https://github.com/streamlink/streamlink/issues
+              https://github.com/3bdoSamy/streamlink-ar/issues
         """),
     )
 
@@ -283,7 +283,7 @@ def build_parser():
 
             The locale is formatted as `[language_code]_[country_code]`, e.g. `en_US` or `es_ES`.
 
-            Default is system locale.
+            Default is "ar_SA".
         """,
     )
 
@@ -944,6 +944,19 @@ def build_parser():
     transport = parser.add_argument_group("Stream transport options")
     transport_hls = parser.add_argument_group("HLS options", parent=transport)
     transport_dash = parser.add_argument_group("DASH options", parent=transport)
+    transport_dash.add_argument(
+        "--audio-lang",
+        type=str,
+        action="append",
+        metavar="LANG",
+        help="""
+            Preferred DASH audio language code.
+            Can be repeated to provide fallback languages.
+
+            Examples: --audio-lang ara --audio-lang eng
+        """,
+    )
+
     transport_ffmpeg = parser.add_argument_group("FFmpeg options", parent=transport)
 
     transport.add_argument(
@@ -1263,6 +1276,18 @@ def build_parser():
         """,
     )
     transport_ffmpeg.add_argument(
+        "--ffmpeg-dkey",
+        type=str,
+        action="append",
+        metavar="DKEY",
+        help="""
+            Set FFmpeg's `-decryption_key` value for encrypted stream inputs.
+            Can be repeated to provide multiple keys.
+
+            Example: --ffmpeg-dkey "key1" --ffmpeg-dkey "key2"
+        """,
+    )
+    transport_ffmpeg.add_argument(
         "--ffmpeg-fout",
         type=str,
         metavar="OUTFORMAT",
@@ -1570,11 +1595,13 @@ _ARGUMENT_TO_SESSIONOPTION: list[tuple[str, str, Callable[[Any], Any] | None]] =
     ("hls_segment_key_uri", "hls-segment-key-uri", None),
     ("hls_audio_select", "hls-audio-select", None),
     ("dash_manifest_reload_attempts", "dash-manifest-reload-attempts", None),
+    ("audio_lang", "dash-audio-lang", None),
     ("ffmpeg_ffmpeg", "ffmpeg-ffmpeg", None),
     ("ffmpeg_no_validation", "ffmpeg-no-validation", None),
     ("ffmpeg_verbose", "ffmpeg-verbose", None),
     ("ffmpeg_verbose_path", "ffmpeg-verbose-path", None),
     ("ffmpeg_loglevel", "ffmpeg-loglevel", None),
+    ("ffmpeg_dkey", "ffmpeg-dkey", None),
     ("ffmpeg_fout", "ffmpeg-fout", None),
     ("ffmpeg_video_transcode", "ffmpeg-video-transcode", None),
     ("ffmpeg_audio_transcode", "ffmpeg-audio-transcode", None),

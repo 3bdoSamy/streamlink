@@ -378,7 +378,7 @@ class TestInfos:
         monkeypatch.setattr("platform.platform", Mock(return_value="linux"))
 
         streamlink_cli.main.setup(parser)
-        assert mock_importlib_metadata.requires.call_args_list == ([call("streamlink")] if logs else [])
+        assert mock_importlib_metadata.requires.call_args_list == ([call("streamlink-ar")] if logs else [])
         assert [(record.name, record.levelname, record.message) for record in caplog.records] == logs
 
     @pytest.mark.parametrize(
@@ -709,7 +709,7 @@ class TestPrint:
                   https://streamlink.github.io/
 
                 Please report broken plugins or bugs to the issue tracker on GitHub:
-                  https://github.com/streamlink/streamlink/issues
+                  https://github.com/3bdoSamy/streamlink-ar/issues
             """)
             in stdout
         )

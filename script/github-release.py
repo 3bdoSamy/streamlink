@@ -26,7 +26,7 @@ if TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 ROOT = Path(__file__).parents[1].resolve()
-DEFAULT_REPO = "streamlink/streamlink"
+DEFAULT_REPO = "3bdoSamy/streamlink-ar"
 
 
 RE_CHANGELOG = re.compile(

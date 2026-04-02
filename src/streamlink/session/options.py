@@ -62,7 +62,7 @@ class StreamlinkOptions(Options):
           - Disable the plugin key-value store
         * - locale
           - ``str``
-          - *system locale*
+          - ``"ar_SA"``
           - Locale setting, in the RFC 1766 format,
             e.g. ``en_US`` or ``es_ES``
         * - interface
@@ -213,6 +213,10 @@ class StreamlinkOptions(Options):
           - ``int``
           - ``3``
           - Max number of DASH manifest reload attempts before giving up
+        * - dash-audio-lang
+          - ``list[str]``
+          - ``[]``
+          - Preferred DASH audio language codes
         * - ffmpeg-ffmpeg
           - ``str | None``
           - ``None``
@@ -238,6 +242,10 @@ class StreamlinkOptions(Options):
           - ``str | None``
           - ``None``
           - Set FFmpeg's ``-loglevel`` value
+        * - ffmpeg-dkey
+          - ``list[str]``
+          - ``[]``
+          - Set one or more FFmpeg ``-decryption_key`` values for encrypted inputs
         * - ffmpeg-fout
           - ``str | None``
           - ``None``
@@ -292,7 +300,7 @@ class StreamlinkOptions(Options):
         super().__init__({
             "user-input-requester": None,
             "no-plugin-cache": False,
-            "locale": None,
+            "locale": "ar_SA",
             "interface": None,
             "ipv4": False,
             "ipv6": False,
@@ -314,12 +322,14 @@ class StreamlinkOptions(Options):
             "hls-segment-key-uri": None,
             "hls-audio-select": [],
             "dash-manifest-reload-attempts": 3,
+            "dash-audio-lang": [],
             "ffmpeg-ffmpeg": None,
             "ffmpeg-no-validation": False,
             "ffmpeg-validation-timeout": 4.0,
             "ffmpeg-verbose": False,
             "ffmpeg-verbose-path": None,
             "ffmpeg-loglevel": None,
+            "ffmpeg-dkey": [],
             "ffmpeg-fout": None,
             "ffmpeg-video-transcode": None,
             "ffmpeg-audio-transcode": None,

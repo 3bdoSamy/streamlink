@@ -83,7 +83,7 @@ intersphinx_timeout = 60
 # -- Options for ext_github ----------------------------------------------------
 # file://./sphinxext/ext_github.py
 
-github_project = "streamlink/streamlink"
+github_project = "3bdoSamy/streamlink-ar"
 
 
 # -- Options for ext_html_template_vars ----------------------------------------
@@ -101,8 +101,8 @@ html_template_vars = {
 
 html_theme = "furo"
 html_theme_options = {
-    "source_repository": "https://github.com/streamlink/streamlink/",
-    "source_branch": "master",
+    "source_repository": "https://github.com/3bdoSamy/streamlink-ar/",
+    "source_branch": "main",
     "source_directory": "docs/",
     "light_logo": "icon.svg",
     "dark_logo": "icon.svg",

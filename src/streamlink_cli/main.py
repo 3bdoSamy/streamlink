@@ -503,6 +503,19 @@ def handle_stream(plugin: Plugin, streams: Mapping[str, Stream], stream_name: st
                 break
 
 
+def log_available_dash_audio_languages(streams: Mapping[str, Stream]) -> None:
+    languages: set[str] = set()
+    for stream in streams.values():
+        if type(stream).shortname() != "dash":
+            continue
+        audio_representation = getattr(stream, "audio_representation", None)
+        if audio_representation and audio_representation.lang:
+            languages.add(audio_representation.lang)
+
+    if languages:
+        log.info(f"Available audio languages: {', '.join(sorted(languages))}")
+
+
 def fetch_streams(plugin: Plugin) -> Mapping[str, Stream]:
     """Fetches streams using correct parameters."""
 
@@ -644,6 +657,8 @@ def handle_url():
 
     if not streams:
         raise StreamlinkCLIError(f"No playable streams found on this URL: {args.url}")
+
+    log_available_dash_audio_languages(streams)
 
     if args.default_stream and not args.stream and not args.json:
         args.stream = args.default_stream
@@ -846,7 +861,13 @@ def log_current_versions() -> None:
     log.debug("Dependencies:")
     # https://peps.python.org/pep-0508/#names
     re_name = re.compile(r"[A-Z\d](?:[A-Z\d._-]*[A-Z\d])?", re.IGNORECASE)
-    dependencies: list[str] = importlib.metadata.requires("streamlink") or []
+    dependencies: list[str] = []
+    for distribution_name in ("streamlink-ar", "streamlink"):
+        try:
+            dependencies = importlib.metadata.requires(distribution_name) or []
+            break
+        except importlib.metadata.PackageNotFoundError:
+            continue
     dependency_names: set[str] = {
         match[0]
         for match in [re_name.match(item) for item in dependencies]

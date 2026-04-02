@@ -240,6 +240,22 @@ class TestDASHStreamParseManifest:
         assert getattr(streams["720p"].audio_representation, "lang", None) == "en_no_voice"
         assert getattr(streams["1080p"].audio_representation, "lang", None) == "en_no_voice"
 
+    def test_audio_multi_lang_preferred(self, session: Streamlink, mpd: Mock):
+        session.set_option("dash-audio-lang", ["ara", "eng"])
+
+        adaptationset = Mock(
+            contentProtections=None,
+            representations=[
+                Mock(id="1", contentProtections=None, mimeType="video/mp4", height=720),
+                Mock(id="2", contentProtections=None, mimeType="audio/aac", bandwidth=128.0, lang="eng"),
+                Mock(id="3", contentProtections=None, mimeType="audio/aac", bandwidth=128.0, lang="ara"),
+            ],
+        )
+        mpd.return_value = Mock(periods=[Mock(adaptationSets=[adaptationset])])
+
+        streams = DASHStream.parse_manifest(session, "http://test/manifest.mpd")
+        assert streams["720p"].audio_representation.lang == "ara"
+
     def test_audio_multi_lang_locale(self, monkeypatch: pytest.MonkeyPatch, session: Streamlink, mpd: Mock):
         session.set_option("locale", "es_ES")
 
@@ -313,6 +329,26 @@ class TestDASHStreamParseManifest:
 
         with pytest.raises(PluginError):
             DASHStream.parse_manifest(session, "http://test/manifest.mpd")
+
+    @pytest.mark.parametrize(
+        "adaptationset",
+        [
+            pytest.param(
+                Mock(contentProtections="DRM", representations=[]),
+                id="ContentProtection on AdaptationSet",
+            ),
+            pytest.param(
+                Mock(contentProtections=None, representations=[Mock(id="1", contentProtections="DRM", mimeType="video/mp4", height=720)]),
+                id="ContentProtection on Representation",
+            ),
+        ],
+    )
+    def test_contentprotection_with_dkey(self, session: Streamlink, mpd: Mock, adaptationset: Mock):
+        session.set_option("ffmpeg-dkey", "00112233445566778899aabbccddeeff")
+        mpd.return_value = Mock(periods=[Mock(adaptationSets=[adaptationset])])
+
+        streams = DASHStream.parse_manifest(session, "http://test/manifest.mpd")
+        assert isinstance(streams, dict)
 
     @pytest.mark.nomockedhttprequest()
     def test_string(self, session: Streamlink, mpd: Mock, parse_xml: Mock):
