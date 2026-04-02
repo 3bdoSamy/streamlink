@@ -861,7 +861,13 @@ def log_current_versions() -> None:
     log.debug("Dependencies:")
     # https://peps.python.org/pep-0508/#names
     re_name = re.compile(r"[A-Z\d](?:[A-Z\d._-]*[A-Z\d])?", re.IGNORECASE)
-    dependencies: list[str] = importlib.metadata.requires("streamlink") or []
+    dependencies: list[str] = []
+    for distribution_name in ("streamlink-ar", "streamlink"):
+        try:
+            dependencies = importlib.metadata.requires(distribution_name) or []
+            break
+        except importlib.metadata.PackageNotFoundError:
+            continue
     dependency_names: set[str] = {
         match[0]
         for match in [re_name.match(item) for item in dependencies]
